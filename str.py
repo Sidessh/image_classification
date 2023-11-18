@@ -79,7 +79,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
 # Load precomputed image features and image IDs
-features_path = "/Users/siddhesh/Downloads/ADM_clip/features"
+features_path = "features"
 image_features = np.load(f"{features_path}/features.npy")
 image_ids = pd.concat([pd.read_csv(file) for file in sorted(glob.glob(f"{features_path}/*.csv"))])['image_id'].tolist()
 
@@ -114,7 +114,7 @@ def search(search_query, image_features, image_ids, results_count=3):
     text_features = encode_search_query(search_query)
     return find_best_matches(text_features, image_features, image_ids, results_count)
 
-images_path = Path("/Users/siddhesh/Downloads/data_2/Apparel/Boys/Images/images_with_product_ids")
+images_path = Path("images_with_product_ids")
 
 if st.button("Search"):
     if search_query:
